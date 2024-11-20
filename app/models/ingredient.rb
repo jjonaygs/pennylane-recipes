@@ -8,7 +8,7 @@ class Ingredient < ApplicationRecord
 
   private
 
-  def normalize_name
-    self.name = name.strip.downcase.titleize
-  end
+    def normalize_name
+      self.name = name.strip.downcase.titleize
+    end
 end
