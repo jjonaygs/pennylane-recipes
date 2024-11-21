@@ -1,0 +1,17 @@
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h2">Recetas</h1>
+    </div>
+
+    <div id="recipes" class="row">
+        <%= turbo_frame_tag "recipes", src: recipes_path(format: :turbo_stream), loading: :lazy %>
+    </div>
+
+    <% if @recipes.next_page %>
+    <%= turbo_frame_tag "load_more", src: recipes_path(page: @recipes.next_page, format: :turbo_stream), loading: :lazy %>
+    <% end %>
+
+    <div class="fixed-bottom bg-light text-center py-2">
+        <p>🚀 Página actual: <span id="current_page"><%= @recipes.current_page %></span></p>
+    </div>
+</div>
