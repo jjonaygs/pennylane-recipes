@@ -1,8 +1,15 @@
-<article id="<%= dom_id(recipe) %>" class="col-12 col-md-6 col-lg-4 mb-4">
-    <div class="card">
-        <img img loading="lazy" src="<%= recipe.image %>" class="card-img-top" alt="<%= recipe.title %>">
-        <div class="card-body">
-            <h5 class="card-title"><%= recipe.title %></h5>
-        </div>
+<article id="<%= dom_id(recipe) %>" class="card">
+    <img loading="lazy" src="<%= recipe.image %>" class="card-img-top" alt="<%= recipe.title %>">
+    <div class="card-body">
+        <h5 class="card-title"><%= recipe.title %></h5>
+        <p class="card-text"><strong>Category:</strong> <%= recipe.category.presence || "N/A" %></p>
+        <p class="card-text"><strong>Author:</strong> <%= recipe.author.presence || "Anónimo" %></p>
+        <p class="card-text"><strong>Ratings:</strong> <%= recipe.ratings.presence || "Sin calificar" %></p>
+        <p class="card-text"><strong>Ingredients:</strong></p>
+        <ul>
+            <% recipe.ingredients.each do |ingredient| %>
+            <li><%= ingredient.name %></li>
+            <% end %>
+        </ul>
     </div>
 </article>
