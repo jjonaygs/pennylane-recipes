@@ -1,0 +1,11 @@
+<%= turbo_stream.append "recipes" do %>
+  <%= render partial: "recipes/recipe", collection: @recipes %>
+<% end %>
+
+<% if @recipes.next_page %>
+  <%= turbo_stream.replace "load_more" do %>
+    <%= turbo_frame_tag "load_more", src: recipes_path(page: @recipes.next_page, format: :turbo_stream), loading: :lazy %>
+  <% end %>
+<% end %>
+
+<%= turbo_stream.update "current_page", @recipes.current_page %>
