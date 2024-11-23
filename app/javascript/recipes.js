@@ -67,6 +67,7 @@ document.addEventListener('turbo:load', () => {
 
     // Function to enable or disable the search button
     function toggleSearchButtonState() {
+        console.log('fsdfsdfs');
         const tags = ingredientTagsContainer.querySelectorAll('.ingredient-tag');
         const isDisabled = tags.length === 0;  // If there are no tags, disable the button
         filterRecipesBtn.disabled = isDisabled; // Enable or disable the button based on the number of tags
@@ -208,7 +209,10 @@ document.addEventListener('turbo:load', () => {
             subtree: true
         });
     }
+    function initialize() {
+        loadTagsFromUrl(); // Volver a cargar los tags desde la URL
+        toggleSearchButtonState(); // Asegurarse de que el botón esté correctamente habilitado o deshabilitado
+    }
 
-    // Load tags from the URL when the page loads
-    loadTagsFromUrl();
+    initialize();
 });
