@@ -1,12 +1,29 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('turbo:load', () => {
     const ingredientInput = document.getElementById('ingredient-input');
     const ingredientTagsContainer = document.getElementById('ingredient-tags');
     const ingredientNamesField = document.getElementById('ingredient_names_field');
     const filterRecipesForm = document.getElementById('ingredient-filter-form');
     const filterRecipesBtn = document.getElementById('filter-recipes-btn');
+    const ingredientSuggestionsContainer = document.getElementById('ingredient-suggestions');
+
+    // Verificar que los elementos existen en el DOM antes de agregar los listeners
+    if (!ingredientInput || !ingredientTagsContainer || !ingredientNamesField || !filterRecipesForm || !filterRecipesBtn) {
+        console.error('Required elements not found in the DOM');
+        return;
+    }
 
     // Función para crear un tag de ingrediente
     function createTag(ingredient) {
+        console.log(`Creating tag for: ${ingredient}`);
+        // Verificar si el tag ya existe antes de crearlo
+        const existingTag = Array.from(ingredientTagsContainer.querySelectorAll('.ingredient-tag'))
+            .find(tag => tag.textContent.replace('×', '').trim() === ingredient.trim());
+
+        if (existingTag) {
+            console.log('Tag already exists');
+            return; // Si el tag ya existe, no agregarlo de nuevo
+        }
+
         const tag = document.createElement('div');
         tag.classList.add('ingredient-tag'); // Clase para los tags con fondo gris y bordes
 
@@ -49,7 +66,70 @@ document.addEventListener('DOMContentLoaded', () => {
         const tags = ingredientTagsContainer.querySelectorAll('.ingredient-tag');
         const isDisabled = tags.length === 0;  // Si no hay tags, el botón se desactiva
         filterRecipesBtn.disabled = isDisabled; // Habilitar o deshabilitar el botón según el número de tags
+
+        // Asegurarnos de que los estilos visuales se actualicen (por ejemplo, con un cambio de opacidad o color)
+        if (isDisabled) {
+            filterRecipesBtn.classList.add('disabled');  // Asegurarse de agregar clase de estilo (si no se aplica el estilo)
+        } else {
+            filterRecipesBtn.classList.remove('disabled');
+        }
     }
+
+    // Función para mostrar las sugerencias de ingredientes
+    function showIngredientSuggestions(query) {
+        console.log(`Searching for: ${query}`);
+        // Limpiar las sugerencias anteriores
+        ingredientSuggestionsContainer.innerHTML = '';
+
+        // Si el query tiene menos de 3 caracteres, no hacer nada
+        if (query.length < 3) {
+            ingredientSuggestionsContainer.style.display = 'none';
+            return;
+        }
+
+        // Realizar la búsqueda de ingredientes a través de una solicitud fetch
+        fetch(`/ingredients/search?q=${query}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data && Array.isArray(data.items)) {
+                    const filteredIngredients = data.items;
+
+                    // Si hay sugerencias, mostrarlas
+                    if (filteredIngredients.length > 0) {
+                        ingredientSuggestionsContainer.style.display = 'block'; // Asegurarse de mostrar el contenedor
+                        filteredIngredients.forEach(ingredient => {
+                            const suggestionItem = document.createElement('div');
+                            suggestionItem.classList.add('suggestion-item');
+                            suggestionItem.textContent = ingredient;
+
+                            // Agregar el ingrediente como tag al hacer clic en él
+                            suggestionItem.addEventListener('click', () => {
+                                createTag(ingredient);
+                                ingredientInput.value = '';  // Limpiar el campo de entrada
+                                ingredientSuggestionsContainer.style.display = 'none';  // Ocultar las sugerencias
+                            });
+
+                            ingredientSuggestionsContainer.appendChild(suggestionItem);
+                        });
+                    } else {
+                        ingredientSuggestionsContainer.style.display = 'none';  // Si no hay resultados, ocultar las sugerencias
+                    }
+                } else {
+                    ingredientSuggestionsContainer.style.display = 'none';  // Si no se recibe un formato esperado, ocultar las sugerencias
+                    console.error('No se encontraron ingredientes en la respuesta o la respuesta no tiene el formato esperado.');
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching ingredients:', error);
+                ingredientSuggestionsContainer.style.display = 'none'; // Ocultar las sugerencias si ocurre un error
+            });
+    }
+
+    // Detectar la entrada de texto para mostrar sugerencias
+    ingredientInput.addEventListener('input', (event) => {
+        const query = event.target.value.trim();
+        showIngredientSuggestions(query);
+    });
 
     // Detectar la tecla Enter para agregar ingredientes como tags
     ingredientInput.addEventListener('keypress', (event) => {
@@ -66,14 +146,6 @@ document.addEventListener('DOMContentLoaded', () => {
         filterRecipesForm.requestSubmit(); // Esto enviará el formulario de manera remota
     });
 
-    // Opcional: Enviar el formulario también cuando se presiona Enter en el formulario
-    filterRecipesForm.addEventListener('keypress', (event) => {
-        if (event.key === 'Enter') {
-            event.preventDefault(); // Prevenir el comportamiento predeterminado
-            filterRecipesForm.requestSubmit(); // Esto enviará el formulario de manera remota
-        }
-    });
-
     // Cargar los tags desde la URL después de que se cargue el contenido
     function loadTagsFromUrl() {
         const urlParams = new URLSearchParams(window.location.search);
@@ -82,6 +154,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (ingredientNames) {
             const ingredients = ingredientNames.split(',');
 
+            // Limpiar los tags existentes antes de agregar los nuevos
+            ingredientTagsContainer.innerHTML = ''; // Esto eliminará los tags previos
+
+            console.log('Loading tags from URL: ', ingredients);
+
             // Crear los tags para los ingredientes recuperados de la URL
             ingredients.forEach(ingredient => {
                 createTag(ingredient.trim());
@@ -89,17 +166,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    initialize();
+
     // Inicialización de los listeners
     function initialize() {
+        console.log('init')
         loadTagsFromUrl(); // Volver a cargar los tags desde la URL
         toggleSearchButtonState(); // Asegurarse de que el botón esté correctamente habilitado o deshabilitado
     }
 
-    // Reconfigurar los listeners después de que se recargue el contenido con Turbo
-    document.addEventListener('turbo:load', () => {
-        initialize(); // Reconfigurar los listeners y cargar los tags de la URL
-    });
-
-    // Inicializar en la carga inicial
-    initialize();
 });
