@@ -1,15 +1,16 @@
 <div class="sidebar">
-    <h2>Filters</h2>
-    <ul>
-        <li><a href="#">Categories</a></li>
-    </ul>
     <!-- Input para Ingredientes -->
-    <div>
+    <div class="ingredient-input-container">
         <label for="ingredient-input">Add Ingredients</label>
-        <input type="text" id="ingredient-input" placeholder="Type an ingredient" class="form-control" />
-        <div id="ingredient-tags" class="mt-2"></div>
-        <button id="filter-recipes-btn" class="btn btn-primary mt-2">Filter Recipes</button>
+        <input type="text" id="ingredient-input" placeholder="Type an ingredient" class="form-control ingredient-input" />
+
+        <!-- Contenedor donde se agregarán los tags de ingredientes -->
+        <div id="ingredient-tags" class="ingredient-tags-container mt-2"></div>
+
+        <!-- Botón para filtrar recetas -->
+        <button id="filter-recipes-btn" class="btn btn-modern mt-2">Filter Recipes</button>
     </div>
+
 </div>
 
 <div class="container mt-5">

@@ -1,11 +1,4 @@
-/* General Styles */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
-    margin: 0;
-    padding: 0;
-}
-
+/* Contenedor Principal */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -22,8 +15,8 @@ body {
     left: 0;
     padding: 3.75rem 1rem 1rem 1rem;
     z-index: 1;
+    transition: all 0.3s ease;
 }
-
 
 .sidebar h2 {
     font-size: 1.2rem;
@@ -47,6 +40,101 @@ body {
 
 .sidebar a:hover {
     color: #adb5bd;
+}
+
+/* Estilo para cada tag (con bordes ligeramente redondeados) */
+.ingredient-tag {
+    background-color: #dcdcdc; /* Caja gris */
+    color: #333;  /* Texto de color oscuro */
+    padding: 0.3rem 0.6rem;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;  /* Para posicionar la X en la esquina superior derecha */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombreado suave */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 4px; /* Bordes redondeados ligeramente */
+    margin-right: 6px; /* Aumento del margen entre los tags */
+    margin-bottom: 8px; /* Aumento del margen entre los tags */
+}
+
+/* Hover: Cambiar el color y sombreado */
+.ingredient-tag:hover {
+    background-color: #b0b0b0; /* Sombra más oscura al pasar el cursor */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Aumentar el sombreado */
+}
+
+/* X de Cierre más pequeña y separada del texto */
+.ingredient-tag .close-btn {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    font-size: 0.6rem;  /* Tamaño de la X más pequeño */
+    color: #333;
+    cursor: pointer;
+    margin-left: 0.4rem;  /* Espacio entre la X y el texto */
+    transition: color 0.3s ease;
+}
+
+.ingredient-tag .close-btn:hover {
+    color: #000; /* Cambio de color al pasar el cursor */
+}
+
+/* Estilo del Input Moderno - Responsivo con respecto al sidebar */
+.ingredient-input-container {
+    margin-top: 1rem;
+}
+
+label[for="ingredient-input"] {
+    display: inline-block;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;  /* Espacio entre el label y el input */
+    margin-top: 1rem;  /* Margen superior para separación */
+    font-weight: bold;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+.ingredient-input {
+    width: 100%;  /* Asegura que el input se ajuste al tamaño disponible */
+    max-width: calc(100% - 50px);  /* Ajuste para el padding del sidebar */
+    padding: 0.75rem;  /* Añade más espacio interno */
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    background-color: #f8f9fa;
+    color: #333;
+    font-size: 1rem;  /* Un tamaño de fuente moderno */
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    margin-bottom: 0.5rem;  /* Aumenta el margen inferior para un mejor espaciado */
+}
+
+.ingredient-input:focus {
+    outline: none;
+    border-color: #3498db;
+    background-color: #fff;
+}
+
+/* Botón Moderno con color #dafbf2 y texto color del sidebar */
+.btn-modern {
+    background-color: #dafbf2; /* Color solicitado para el botón */
+    color: #003d3d;  /* Color del texto igual al fondo del sidebar */
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-modern:hover {
+    background-color: #a6d8e8;  /* Sombra más oscura del color de fondo al pasar el cursor */
+    transform: translateY(-2px);
+}
+
+.btn-modern:active {
+    background-color: #91c1c9;
+    transform: translateY(0);
 }
 
 /* Main Content */
