@@ -1,4 +1,4 @@
-/* Contenedor Principal */
+/* Main Container */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -42,58 +42,57 @@
     color: #adb5bd;
 }
 
-/* Estilo para cada tag (con bordes ligeramente redondeados) */
+/* Style for each tag (with slightly rounded borders) */
 .ingredient-tag {
-    background-color: #dcdcdc; /* Caja gris */
-    color: #333;  /* Texto de color oscuro */
+    background-color: #dcdcdc; /* Gray box */
+    color: #333;  /* Dark text color */
     padding: 0.3rem 0.6rem;
     font-size: 0.9rem;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    position: relative;  /* Para posicionar la X en la esquina superior derecha */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombreado suave */
+    position: relative;  /* To position the X in the top right corner */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Soft shadow */
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 4px; /* Bordes redondeados ligeramente */
-    margin-right: 6px; /* Aumento del margen entre los tags */
-    margin-bottom: 8px; /* Aumento del margen entre los tags */
+    border-radius: 4px; /* Slightly rounded borders */
+    margin-right: 6px; /* Increased margin between tags */
+    margin-bottom: 8px; /* Increased margin between tags */
 }
 
-/* Hover: Cambiar el color y sombreado */
+/* Hover: Change color and shadow */
 .ingredient-tag:hover {
-    background-color: #b0b0b0; /* Sombra más oscura al pasar el cursor */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Aumentar el sombreado */
+    background-color: #b0b0b0; /* Darker shade when hovered */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Increased shadow */
 }
 
-/* X de Cierre más pequeña y separada del texto */
+/* Smaller close X and more separated from text */
 .ingredient-tag .close-btn {
     position: absolute;
     top: 2px;
     right: 2px;
-    font-size: 0.6rem;  /* Tamaño de la X más pequeño */
+    font-size: 0.6rem;  /* Smaller X size */
     color: #333;
     cursor: pointer;
-    margin-left: 0.4rem;  /* Espacio entre la X y el texto */
+    margin-left: 0.4rem;  /* Space between X and text */
     transition: color 0.3s ease;
 }
 
 .ingredient-tag .close-btn:hover {
-    color: #000; /* Cambio de color al pasar el cursor */
+    color: #000; /* Change color on hover */
 }
 
-/* Clase highlight */
+/* Highlight class */
 .ingredient-name.highlighted-ingredient {
-    background-color: #75b79e;  /* Resaltado amarillo */
-    color: #333;  /* Texto en color oscuro */
+    background-color: #75b79e;  /* Yellow highlight */
+    color: #333;  /* Dark text color */
     font-weight: bold;
     border-radius: 4px;
     padding: 0.2rem 0.5rem;
-    box-shadow: 0 0 8px rgba(117, 183, 158, 0.5); /* Sombra suave */
+    box-shadow: 0 0 8px rgba(117, 183, 158, 0.5); /* Soft shadow */
     transition: all 0.3s ease;
 }
 
-
-/* Estilo del Input Moderno - Responsivo con respecto al sidebar */
+/* Modern Input Style - Responsive with respect to the sidebar */
 .ingredient-input-container {
     margin-top: 1rem;
 }
@@ -101,24 +100,24 @@
 label[for="ingredient-input"] {
     display: inline-block;
     font-size: 1rem;
-    margin-bottom: 0.5rem;  /* Espacio entre el label y el input */
-    margin-top: 1rem;  /* Margen superior para separación */
+    margin-bottom: 0.5rem;  /* Space between label and input */
+    margin-top: 1rem;  /* Top margin for separation */
     font-weight: bold;
     transition: color 0.3s ease;
     cursor: pointer;
 }
 
 .ingredient-input {
-    width: 100%;  /* Asegura que el input se ajuste al tamaño disponible */
-    max-width: calc(100% - 50px);  /* Ajuste para el padding del sidebar */
-    padding: 0.75rem;  /* Añade más espacio interno */
+    width: 100%;  /* Ensures the input fits the available size */
+    max-width: calc(100% - 50px);  /* Adjusts for sidebar padding */
+    padding: 0.75rem;  /* Adds more internal space */
     border-radius: 4px;
     border: 1px solid #ddd;
     background-color: #f8f9fa;
     color: #333;
-    font-size: 1rem;  /* Un tamaño de fuente moderno */
+    font-size: 1rem;  /* Modern font size */
     transition: border-color 0.3s ease, background-color 0.3s ease;
-    margin-bottom: 0.5rem;  /* Aumenta el margen inferior para un mejor espaciado */
+    margin-bottom: 0.5rem;  /* Increased bottom margin for better spacing */
 }
 
 .ingredient-input:focus {
@@ -128,40 +127,40 @@ label[for="ingredient-input"] {
 }
 
 #filter-recipes-btn:disabled {
-    background-color: #cccccc; /* Fondo gris */
-    cursor: not-allowed; /* Cambiar el cursor para mostrar que no es clickeable */
-    opacity: 0.6; /* Hacerlo ligeramente translúcido */
+    background-color: #cccccc; /* Gray background */
+    cursor: not-allowed; /* Changes cursor to indicate it's not clickable */
+    opacity: 0.6; /* Makes it slightly translucent */
 }
 
-/* Sugerencias de Ingredientes */
+/* Ingredient Suggestions */
 #ingredient-suggestions {
     position: absolute;
-    width: calc(100% - 50px);  /* Asegura que tenga el mismo ancho que el input */
+    width: calc(100% - 50px);  /* Ensures it matches the input width */
     max-height: 200px;
     overflow-y: auto;
     border: 1px solid #ccc;
     background-color: #fff;
-    display: none; /* Se muestra solo cuando hay sugerencias */
-    z-index: 1000; /* Asegurarse de que esté por encima de otros elementos */
-    border-radius: 4px; /* Bordes redondeados para un diseño más suave */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave para resaltar el cuadro */
+    display: none; /* Shows only when there are suggestions */
+    z-index: 1000; /* Ensures it's above other elements */
+    border-radius: 4px; /* Rounded corners for a softer design */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Soft shadow to highlight the box */
 }
 
 .suggestion-item {
     padding: 10px;
-    color: #333;  /* Color de la letra más oscuro para buena legibilidad */
+    color: #333;  /* Darker text color for good readability */
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .suggestion-item:hover {
-    background-color: #f0f0f0; /* Fondo claro cuando el mouse pasa por encima */
+    background-color: #f0f0f0; /* Light background when hovered */
 }
 
-/* Botón Moderno con color #dafbf2 y texto color del sidebar */
+/* Modern Button with color #dafbf2 and text color from the sidebar */
 .btn-modern {
-    background-color: #dafbf2; /* Color solicitado para el botón */
-    color: #003d3d;  /* Color del texto igual al fondo del sidebar */
+    background-color: #dafbf2; /* Requested color for the button */
+    color: #003d3d;  /* Text color matches the sidebar background */
     padding: 0.8rem 1.5rem;
     border-radius: 4px;
     border: none;
@@ -171,7 +170,7 @@ label[for="ingredient-input"] {
 }
 
 .btn-modern:hover {
-    background-color: #a6d8e8;  /* Sombra más oscura del color de fondo al pasar el cursor */
+    background-color: #a6d8e8;  /* Darker shade of the background color on hover */
     transform: translateY(-2px);
 }
 

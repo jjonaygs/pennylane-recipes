@@ -13,7 +13,6 @@ class Recipe < ApplicationRecord
     where(category: category_id) if category_id.present?
   }
 
-  # Ejemplo de otros scopes necesarios:
   scope :by_ingredients, ->(ingredient_ids) {
     joins(:recipe_ingredients)
       .where(recipe_ingredients: { ingredient_id: ingredient_ids })

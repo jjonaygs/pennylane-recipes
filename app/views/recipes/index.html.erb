@@ -1,17 +1,16 @@
 <div class="sidebar">
-    <!-- Input para Ingredientes -->
+    <!-- Ingredient Input -->
     <div class="ingredient-input-container">
         <label for="ingredient-input">Add Ingredients</label>
         <input type="text" id="ingredient-input" placeholder="Type an ingredient" class="form-control ingredient-input" />
         <div id="ingredient-suggestions" class="suggestions-container"></div>
 
-        <!-- Contenedor donde se agregarán los tags de ingredientes -->
+        <!-- Container where ingredient tags will be added -->
         <div id="ingredient-tags" class="ingredient-tags-container mt-2"></div>
 
-        <!-- Botón para filtrar recetas -->
+        <!-- Button to filter recipes -->
         <button id="filter-recipes-btn" class="btn btn-modern mt-2">Filter Recipes</button>
     </div>
-
 </div>
 
 <div class="container mt-5">
@@ -19,12 +18,12 @@
         <h1 class="h2">Recipes</h1>
     </div>
 
-    <!-- Renderizar recetas de la página inicial -->
+    <!-- Render recipes from the current page -->
     <div id="recipes">
         <%= render partial: "recipes/recipe", collection: @recipes %>
     </div>
 
-    <!-- Botón de "Cargar más" si hay una página siguiente -->
+    <!-- "Load more" button if there is a next page -->
     <% if @recipes.next_page %>
     <%= render partial: "recipes/load_more" %>
     <% end %>
