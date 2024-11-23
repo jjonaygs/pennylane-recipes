@@ -3,22 +3,37 @@
     <ul>
         <li><a href="#">Categories</a></li>
     </ul>
+    <!-- Input para Ingredientes -->
+    <div>
+        <label for="ingredient-input">Add Ingredients</label>
+        <input type="text" id="ingredient-input" placeholder="Type an ingredient" class="form-control" />
+        <div id="ingredient-tags" class="mt-2"></div>
+        <button id="filter-recipes-btn" class="btn btn-primary mt-2">Filter Recipes</button>
+    </div>
 </div>
 
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h2">Recepies</h1>
+        <h1 class="h2">Recipes</h1>
     </div>
 
+    <!-- Renderizar recetas de la página inicial -->
     <div id="recipes">
-        <%= turbo_frame_tag "recipes", src: recipes_path(format: :turbo_stream), loading: :lazy %>
+        <%= render partial: "recipes/recipe", collection: @recipes %>
     </div>
 
+    <!-- Botón de "Cargar más" si hay una página siguiente -->
     <% if @recipes.next_page %>
-    <%= turbo_frame_tag "load_more", src: recipes_path(page: @recipes.next_page, format: :turbo_stream), loading: :lazy %>
+    <%= render partial: "recipes/load_more" %>
     <% end %>
 
     <div class="fixed-bottom">
         <p>Current page: <span id="current_page"><%= @recipes.current_page %></span></p>
     </div>
 </div>
+
+<%= form_with url: recipes_path, method: :get, remote: true, id: "ingredient-filter-form" do |form| %>
+<%= hidden_field_tag :ingredient_names, "", id: "ingredient_names_field" %>
+<%= hidden_field_tag :category_id, params[:category_id] %>
+<%= form.submit "Filter Recipes", class: "btn btn-primary mt-2" %>
+<% end %>
