@@ -9,34 +9,24 @@ class Recipe < ApplicationRecord
   validates :image, presence: true, allow_blank: true
   validates :cuisine, presence: true, allow_blank: true
 
-  # Scope para filtrar recetas por ingredientes
+  scope :by_category, ->(category_id) {
+    where(category: category_id) if category_id.present?
+  }
+
+  # Ejemplo de otros scopes necesarios:
   scope :by_ingredients, ->(ingredient_ids) {
     joins(:recipe_ingredients)
       .where(recipe_ingredients: { ingredient_id: ingredient_ids })
       .distinct
   }
 
-  # Scope para filtrar recetas por categoría
-  scope :by_category, ->(category_id) {
-    where(category: category_id) if category_id.present?
+  scope :ordered_by_matched_ingredients, ->(ingredient_ids) {
+    select(
+      "recipes.*, COUNT(recipe_ingredients.id) AS matched_ingredients_count"
+    ).joins(:recipe_ingredients)
+     .where(recipe_ingredients: { ingredient_id: ingredient_ids })
+     .group("recipes.id")
+     .order("matched_ingredients_count DESC")
   }
-
-  scope :with_ingredient_counts, ->(ingredient_ids) {
-  select_sentence = "recipes.*, 
-  SUM(CASE 
-        WHEN recipe_ingredients.ingredient_id IN (#{ingredient_ids.join(',')}) 
-        THEN 1 
-        ELSE 0 
-      END) AS matched_ingredients"
-  
-  select(select_sentence)
-  .joins(:recipe_ingredients)
-  .where('recipe_ingredients.ingredient_id IN (?)', ingredient_ids)
-  .group('recipes.id')
-  .order('matched_ingredients DESC')
-}
-  
-  
-
 
 end
