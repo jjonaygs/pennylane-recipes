@@ -81,6 +81,18 @@
     color: #000; /* Cambio de color al pasar el cursor */
 }
 
+/* Clase highlight */
+.ingredient-name.highlighted-ingredient {
+    background-color: #75b79e;  /* Resaltado amarillo */
+    color: #333;  /* Texto en color oscuro */
+    font-weight: bold;
+    border-radius: 4px;
+    padding: 0.2rem 0.5rem;
+    box-shadow: 0 0 8px rgba(117, 183, 158, 0.5); /* Sombra suave */
+    transition: all 0.3s ease;
+}
+
+
 /* Estilo del Input Moderno - Responsivo con respecto al sidebar */
 .ingredient-input-container {
     margin-top: 1rem;

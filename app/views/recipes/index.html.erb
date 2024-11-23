@@ -37,5 +37,5 @@
 <%= form_with url: recipes_path, method: :get, remote: true, id: "ingredient-filter-form" do |form| %>
 <%= hidden_field_tag :ingredient_names, "", id: "ingredient_names_field" %>
 <%= hidden_field_tag :category_id, params[:category_id] %>
-<%= form.submit "Filter Recipes", class: "btn btn-primary mt-2" %>
+<%= form.submit "Filter Recipes", class: "btn btn-primary mt-2 hidden" %>
 <% end %>

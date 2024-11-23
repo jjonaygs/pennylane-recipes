@@ -8,17 +8,15 @@
         <p class="card-text"><strong>Ingredients:</strong></p>
         <ul>
             <% recipe.recipe_ingredients.each do |recipe_ingredient| %>
-            <!-- Usamos recipe_ingredients en lugar de ingredients -->
-            <li>
-                <%= recipe_ingredient.ingredient.name %>
-                <!-- Nombre del ingrediente -->
+            <li class="ingredient-item">
+                <span class="ingredient-name">
+                    <%= recipe_ingredient.ingredient.name %>
+                </span>
                 <% if recipe_ingredient.quantity.present? %>
                 <%= " - #{recipe_ingredient.quantity}" %>
-                <!-- Cantidad -->
                 <% end %>
                 <% if recipe_ingredient.unit.present? %>
                 <%= " #{recipe_ingredient.unit}" %>
-                <!-- Unidad -->
                 <% end %>
             </li>
             <% end %>

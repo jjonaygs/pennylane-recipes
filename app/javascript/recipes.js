@@ -39,6 +39,7 @@ document.addEventListener('turbo:load', () => {
             tag.remove();
             updateIngredientNamesField();
             toggleSearchButtonState(); // Actualizar estado del botón de búsqueda
+            highlightIngredientsInRecipes(); // Actualizar los ingredientes resaltados
         });
 
         // Agregar la X al tag
@@ -52,6 +53,9 @@ document.addEventListener('turbo:load', () => {
 
         // Actualizar el estado del botón de búsqueda
         toggleSearchButtonState();
+
+        // Actualizar los ingredientes resaltados
+        highlightIngredientsInRecipes();
     }
 
     // Función para actualizar el campo oculto con los ingredientes
@@ -166,13 +170,45 @@ document.addEventListener('turbo:load', () => {
         }
     }
 
-    initialize();
-
-    // Inicialización de los listeners
-    function initialize() {
-        console.log('init')
-        loadTagsFromUrl(); // Volver a cargar los tags desde la URL
-        toggleSearchButtonState(); // Asegurarse de que el botón esté correctamente habilitado o deshabilitado
+    // Función para resaltar los ingredientes encontrados en las recetas
+    function highlightIngredientsInRecipes() {
+        // Asegúrate de que ingredientTagsContainer esté correctamente asignado
+        const ingredientTagsContainer = document.querySelector('.ingredient-tags-container');
+    
+        // Si no se encuentra el contenedor, salimos de la función
+        if (!ingredientTagsContainer) return;
+    
+        // Obtén los nombres de los ingredientes desde las etiquetas
+        const ingredients = Array.from(ingredientTagsContainer.querySelectorAll('.ingredient-tag'))
+            .map(tag => tag.textContent.replace('×', '').trim());
+    
+        // Selecciona todos los elementos de ingredientes en las recetas
+        const ingredientElements = document.querySelectorAll('.ingredient-name');
+    
+        // Recorre cada ingrediente en las recetas y añade o quita la clase de resaltado
+        ingredientElements.forEach(element => {
+            if (ingredients.includes(element.textContent.trim())) {
+                element.classList.add('highlighted-ingredient');
+            } else {
+                element.classList.remove('highlighted-ingredient');
+            }
+        });
     }
 
+    // Detectar cuando nuevas recetas son cargadas (scroll infinito)
+    const recipesContainer = document.querySelector('#recipes');  // Cambié este selector
+    if (recipesContainer) {
+        const observer = new MutationObserver(() => {
+            highlightIngredientsInRecipes(); // Resaltar ingredientes después de que se carguen nuevas recetas
+        });
+
+        // Empezar a observar el contenedor de recetas
+        observer.observe(recipesContainer, {
+            childList: true,
+            subtree: true
+        });
+    }
+
+    // Cargar tags desde la URL cuando se carga la página
+    loadTagsFromUrl();
 });
