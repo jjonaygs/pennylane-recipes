@@ -115,6 +115,12 @@ label[for="ingredient-input"] {
     background-color: #fff;
 }
 
+#filter-recipes-btn:disabled {
+    background-color: #cccccc; /* Fondo gris */
+    cursor: not-allowed; /* Cambiar el cursor para mostrar que no es clickeable */
+    opacity: 0.6; /* Hacerlo ligeramente translúcido */
+}
+
 /* Botón Moderno con color #dafbf2 y texto color del sidebar */
 .btn-modern {
     background-color: #dafbf2; /* Color solicitado para el botón */
