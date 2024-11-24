@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_19_220549) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_24_125730) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -46,6 +46,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_19_220549) do
     t.index ["title"], name: "index_recipes_on_title", unique: true
   end
 
-  add_foreign_key "recipe_ingredients", "ingredients"
-  add_foreign_key "recipe_ingredients", "recipes"
+  add_foreign_key "recipe_ingredients", "ingredients", on_delete: :restrict
+  add_foreign_key "recipe_ingredients", "recipes", on_delete: :cascade
 end

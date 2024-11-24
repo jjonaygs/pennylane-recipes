@@ -5,6 +5,6 @@ class RecipeIngredient < ApplicationRecord
   validates :ingredient, presence: true
   validates :recipe, presence: true
 
-  validates :quantity, presence: true, numericality: { allow_nil: true }  # O ajusta el tipo de validación
+  validates :quantity, presence: true, allow_nil: true
   validates :unit, presence: true, allow_nil: true
 end

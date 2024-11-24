@@ -1,4 +1,4 @@
-module Recipes
+module Ingredients
   class IngredientExtractor
     def initialize(ingredients)
       @ingredients = ingredients || []
