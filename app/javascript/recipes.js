@@ -14,13 +14,11 @@ document.addEventListener('turbo:load', () => {
 
     // Function to create an ingredient tag
     function createTag(ingredient) {
-        console.log(`Creating tag for: ${ingredient}`);
         // Check if the tag already exists before creating it
         const existingTag = Array.from(ingredientTagsContainer.querySelectorAll('.ingredient-tag'))
             .find(tag => tag.textContent.replace('×', '').trim() === ingredient.trim());
 
         if (existingTag) {
-            console.log('Tag already exists');
             return; // If the tag already exists, do not add it again
         }
 
@@ -67,7 +65,6 @@ document.addEventListener('turbo:load', () => {
 
     // Function to enable or disable the search button
     function toggleSearchButtonState() {
-        console.log('fsdfsdfs');
         const tags = ingredientTagsContainer.querySelectorAll('.ingredient-tag');
         const isDisabled = tags.length === 0;  // If there are no tags, disable the button
         filterRecipesBtn.disabled = isDisabled; // Enable or disable the button based on the number of tags
@@ -82,7 +79,6 @@ document.addEventListener('turbo:load', () => {
 
     // Function to show ingredient suggestions
     function showIngredientSuggestions(query) {
-        console.log(`Searching for: ${query}`);
         // Clear previous suggestions
         ingredientSuggestionsContainer.innerHTML = '';
 
@@ -161,8 +157,6 @@ document.addEventListener('turbo:load', () => {
 
             // Clear existing tags before adding new ones
             ingredientTagsContainer.innerHTML = ''; // This will remove previous tags
-
-            console.log('Loading tags from URL: ', ingredients);
 
             // Create tags for the ingredients retrieved from the URL
             ingredients.forEach(ingredient => {
