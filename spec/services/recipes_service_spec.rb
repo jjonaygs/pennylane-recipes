@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe RecipeService, type: :service do
   describe '.fetch_recipes' do
-    let(:ingredient_ids) { [1, 2, 3] }
+    let(:ingredient_ids) { [ 1, 2, 3 ] }
     let(:page) { 1 }
     let(:per_page) { 2 }
     let(:recipes_relation) { class_double(Recipe) }

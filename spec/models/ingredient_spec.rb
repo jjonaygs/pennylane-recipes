@@ -20,7 +20,7 @@ RSpec.describe Ingredient, type: :model do
 
   describe 'destroy' do
     let!(:recipe) { Recipe.create!(title: "Soup") }
-    
+
     let!(:ingredient_without_recipe) { Ingredient.create!(name: "Lettuce") }
     let!(:recipe_ingredient) { RecipeIngredient.create!(ingredient: @ingredient1, recipe: recipe) }
 
@@ -40,12 +40,12 @@ RSpec.describe Ingredient, type: :model do
   describe '.search_by_name' do
     it 'returns ingredients matching the query when the query is part of the name' do
       result = Ingredient.search_by_name("car")
-      expect(result).to match_array([@ingredient1, @ingredient2])
+      expect(result).to match_array([ @ingredient1, @ingredient2 ])
     end
 
     it 'returns ingredients matching the query when the query is case insensitive' do
       result = Ingredient.search_by_name("Car")
-      expect(result).to match_array([@ingredient1, @ingredient2])
+      expect(result).to match_array([ @ingredient1, @ingredient2 ])
     end
 
     it 'returns an empty array when no matches are found' do
