@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe Recipes::RecipeProcessor, type: :model do
   let(:valid_recipe_data) do
     {
@@ -21,12 +23,12 @@ RSpec.describe Recipes::RecipeProcessor, type: :model do
         { quantity: "1", unit: "cup", name: "cornmeal" },
         { quantity: "⅔", unit: "cup", name: "sugar" }
       ])
-      allow(Recipes::IngredientExtractor).to receive(:new).and_return(extractor_double)
+      allow(Ingredients::IngredientExtractor).to receive(:new).and_return(extractor_double)
 
       recipe_processor = Recipes::RecipeProcessor.new(valid_recipe_data)
       recipe_processor.process
 
-      expect(Recipes::IngredientExtractor).to have_received(:new).with(valid_recipe_data[:ingredients])
+      expect(Ingredients::IngredientExtractor).to have_received(:new).with(valid_recipe_data[:ingredients])
       expect(extractor_double).to have_received(:extract)
     end
 

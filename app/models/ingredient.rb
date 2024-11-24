@@ -6,6 +6,11 @@ class Ingredient < ApplicationRecord
 
   before_save :normalize_name
 
+  def self.search_by_name(query)
+    return [] if query.blank?
+    where("LOWER(name) LIKE ?", "%#{query.downcase}%")
+  end
+
   private
 
     def normalize_name

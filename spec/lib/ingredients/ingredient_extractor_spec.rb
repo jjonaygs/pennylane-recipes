@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Recipes::IngredientExtractor, type: :model do
+RSpec.describe Ingredients::IngredientExtractor, type: :model do
   describe '#extract' do
     context 'when ingredients are provided' do
       let(:ingredients) do

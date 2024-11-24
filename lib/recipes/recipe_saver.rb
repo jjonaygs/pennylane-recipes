@@ -70,32 +70,3 @@ module Recipes
       end
   end
 end
-
-RSpec.describe Recipes::RecipeSaver, type: :model do
-  describe "#decode_image_url" do
-    let(:recipe_saver) { Recipes::RecipeSaver.new({}, []) }
-
-    context "when the URL is nil" do
-      it "returns nil" do
-        expect(recipe_saver.send(:decode_image_url, nil)).to be_nil
-      end
-    end
-
-    context "when the URL is not from Meredith" do
-      it "returns the original URL" do
-        url = "https://example.com/image.jpg"
-        decoded_url = recipe_saver.send(:decode_image_url, url)
-        expect(decoded_url).to eq(url)
-      end
-    end
-
-    context "when the URL is a valid Meredith URL with an encoded image URL" do
-      it "decodes the URL correctly" do
-        encoded_url = "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F43%2F2021%2F10%2F26%2Fcornbread-1.jpg"
-        decoded_url = recipe_saver.send(:decode_image_url, encoded_url)
-        expected_url = "https://static.onecms.io/wp-content/uploads/sites/43/2021/10/26/cornbread-1.jpg"
-        expect(decoded_url).to eq(expected_url)
-      end
-    end
-  end
-end

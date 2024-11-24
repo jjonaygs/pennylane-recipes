@@ -1,4 +1,6 @@
-RSpec.describe Recipes::RecipeSaver, type: :model do
+require 'rails_helper'
+
+RSpec.describe Recipes::RecipeSaver do
   let(:valid_recipe_data) do
     {
       title: 'Chocolate Cake',

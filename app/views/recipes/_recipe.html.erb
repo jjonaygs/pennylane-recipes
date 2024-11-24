@@ -7,8 +7,18 @@
         <p class="card-text"><strong>Ratings:</strong> <%= recipe.ratings.presence || "Sin calificar" %></p>
         <p class="card-text"><strong>Ingredients:</strong></p>
         <ul>
-            <% recipe.ingredients.each do |ingredient| %>
-            <li><%= ingredient.name %></li>
+            <% recipe.recipe_ingredients.each do |recipe_ingredient| %>
+            <li class="ingredient-item">
+                <span class="ingredient-name">
+                    <%= recipe_ingredient.ingredient.name %>
+                </span>
+                <% if recipe_ingredient.quantity.present? %>
+                <%= " - #{recipe_ingredient.quantity}" %>
+                <% end %>
+                <% if recipe_ingredient.unit.present? %>
+                <%= " #{recipe_ingredient.unit}" %>
+                <% end %>
+            </li>
             <% end %>
         </ul>
     </div>

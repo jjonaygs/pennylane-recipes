@@ -8,7 +8,7 @@ module Recipes
       ingredients = @recipe_data[:ingredients]
 
       if ingredients.present?
-        extracted_ingredients = IngredientExtractor.new(ingredients).extract
+        extracted_ingredients = Ingredients::IngredientExtractor.new(ingredients).extract
         RecipeSaver.new(@recipe_data, extracted_ingredients).save
       else
         puts "Warning: No ingredients found for recipe #{@recipe_data[:title]}."
