@@ -7,7 +7,7 @@ class Ingredient < ApplicationRecord
   before_save :normalize_name
 
   def self.search_by_name(query)
-    where('name LIKE ?', "%#{query}%")
+    where("name LIKE ?", "%#{query}%")
   end
 
   private

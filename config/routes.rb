@@ -14,5 +14,5 @@ Rails.application.routes.draw do
 
   resources :recipes, only: [ :index ]
 
-  get 'ingredients/search', to: 'ingredients#search'
+  get "ingredients/search", to: "ingredients#search"
 end

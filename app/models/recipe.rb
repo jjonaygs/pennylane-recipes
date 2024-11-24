@@ -23,5 +23,4 @@ class Recipe < ApplicationRecord
      .group("recipes.id")
      .order("matched_ingredients_count DESC")
   }
-
 end
