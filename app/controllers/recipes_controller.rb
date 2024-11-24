@@ -6,9 +6,10 @@ class RecipesController < ApplicationController
       []
     end
 
+    page = params[:page] || "1"
     @recipes = RecipeService.fetch_recipes(
       ingredient_ids: ingredient_ids,
-      page: params[:page] || 1,
+      page: page.to_i,
       per_page: 10
     )
 
