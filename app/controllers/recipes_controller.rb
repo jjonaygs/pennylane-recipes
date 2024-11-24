@@ -8,7 +8,6 @@ class RecipesController < ApplicationController
 
     @recipes = RecipeService.fetch_recipes(
       ingredient_ids: ingredient_ids,
-      category_id: params[:category_id],
       page: params[:page] || 1,
       per_page: 10
     )

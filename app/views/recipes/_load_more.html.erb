@@ -2,7 +2,6 @@
     src: recipes_path(
         page: @recipes.next_page, 
         ingredient_names: params[:ingredient_names], 
-        category_id: params[:category_id], 
         format: :turbo_stream
     ), 
     loading: :lazy %>

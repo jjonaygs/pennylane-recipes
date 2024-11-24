@@ -9,10 +9,6 @@ class Recipe < ApplicationRecord
   validates :image, presence: true, allow_blank: true
   validates :cuisine, presence: true, allow_blank: true
 
-  scope :by_category, ->(category_id) {
-    where(category: category_id) if category_id.present?
-  }
-
   scope :by_ingredients, ->(ingredient_ids) {
     joins(:recipe_ingredients)
       .where(recipe_ingredients: { ingredient_id: ingredient_ids })
