@@ -3,7 +3,7 @@ class RecipeService
     recipes = Recipe.all
 
     if ingredient_ids.present?
-      recipes = recipes.by_ingredients(ingredient_ids).ordered_by_matched_ingredients(ingredient_ids)
+      recipes = recipes.by_matched_ingredients(ingredient_ids)
     end
 
     recipes.paginate(page: page, per_page: per_page)

@@ -9,13 +9,7 @@ class Recipe < ApplicationRecord
   validates :image, presence: true, allow_blank: true
   validates :cuisine, presence: true, allow_blank: true
 
-  scope :by_ingredients, ->(ingredient_ids) {
-    joins(:recipe_ingredients)
-      .where(recipe_ingredients: { ingredient_id: ingredient_ids })
-      .distinct
-  }
-
-  scope :ordered_by_matched_ingredients, ->(ingredient_ids) {
+  scope :by_matched_ingredients, ->(ingredient_ids) {
     select(
       "recipes.*, COUNT(recipe_ingredients.id) AS matched_ingredients_count"
     ).joins(:recipe_ingredients)
